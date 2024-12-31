@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tenancyrequest', function (Blueprint $table) {
+        Schema::create('tenancy_requests', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email');
