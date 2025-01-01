@@ -2,16 +2,14 @@
 namespace App\Livewire;
 use App\Models\TenancyRequest as ModelsTenancyRequest;
 use Livewire\Component;
-use Livewire\Attributes\Validate;
 
 class TenancyRequest extends Component
 {
-    #[Validate]
-    public $name;
-    public $description;
-    public $email;
-    public $phone_number;
-    public $slug;
+    public $name = '';
+    public $description= '';
+    public $email= '';
+    public $phone_number= '';
+    public $slug= '';
 
     protected function rules()
     {
@@ -29,6 +27,7 @@ class TenancyRequest extends Component
         $validatedData = $this->validate();
         ModelsTenancyRequest::create($validatedData);
         $this->reset();
+        $this->redirect('tenancyrequest');
     }
     public function render()
     {
