@@ -9,7 +9,6 @@
       
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-        {{-- <livewire:TenancyRequest></livewire:TenancyRequest> --}}
-       
+        <livewire:admin-login-form/>
     </body>
 </html>

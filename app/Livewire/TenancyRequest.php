@@ -23,7 +23,7 @@ class TenancyRequest extends Component
        
     }
     public function submitTenancyRequest()
-    {
+    {//TODO - Add toaster message
         $validatedData = $this->validate();
         ModelsTenancyRequest::create($validatedData);
         $this->reset();
