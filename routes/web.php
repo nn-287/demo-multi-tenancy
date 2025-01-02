@@ -11,7 +11,7 @@ Route::get('/tenancyrequest', TenancyRequest::class)->name('tenancyrequest');
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', AdminPanel::class)->name('admin-dashboard');
+    Route::get('/admin-dashboard', AdminPanel::class);
 
    
 });
