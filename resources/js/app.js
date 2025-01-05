@@ -1,3 +1,3 @@
 // import './bootstrap';
 import 'preline/preline';
-// import {HSOverlay} from 'preline/preline'
+import { HSOverlay } from 'preline';
