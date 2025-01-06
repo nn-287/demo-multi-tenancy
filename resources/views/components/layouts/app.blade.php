@@ -18,23 +18,26 @@
         @livewireStyles
     </head>
      
-    <body >
+    <body>
         <div class="container mx-auto p-4">
             {{ $slot }}
         </div>
 
-        <!-- Preline Toast Container -->
-        <div id="toast-container" class="fixed top-4 right-4 z-50"></div>
+        @livewire('notification')
 
         @livewireScripts
-        
-        <!-- Preline JS from CDN -->
         <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.min.js"></script>
 
+        <script>
+            document.addEventListener('livewire:initialized', () => {
+                Livewire.on('notification:hide', (event) => {
+                    setTimeout(() => {
+                        Livewire.dispatch('showNotification', ['', '']);
+                    }, event.time);
+                });
+            });
+        </script>
 
-        
         @stack('scripts')
     </body>
 </html>
-
-

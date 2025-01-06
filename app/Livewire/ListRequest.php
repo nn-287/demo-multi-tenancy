@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Livewire;
 use App\Models\TenancyRequest;
 use App\Models\Tenant;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
@@ -48,14 +45,15 @@ class ListRequest extends Component
                     'domain' => "{$domain}.{$dbName}.{$appUrl}", 
                 ]);
 
-    
+                $this->dispatch('showNotification', 'Tenant and its related data has been successfully created!','success');  
+
         } catch (\Exception $e) {
+            $this->dispatch('showNotification', 'This tenant already exists!','error');        
+
             Log::error('Tenant creation failed:', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString()
             ]);
-            
-            return back();
         }
     }
    
