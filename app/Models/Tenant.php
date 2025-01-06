@@ -16,12 +16,7 @@ class Tenant extends BaseTenant implements TenantWithDatabase
 
     protected $fillable = [
         'id',
+        'slug',
         'data',
     ];
-    
-
-    // public function user(): HasOne
-    // {
-    //     return $this->hasOne(User::class);
-    // }
 }
