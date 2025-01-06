@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\AdminPanel;
+use App\Livewire\ListtenancyRequests;
 use App\Livewire\TenancyRequest;
 use Illuminate\Support\Facades\Route;
 
@@ -12,6 +13,7 @@ Route::get('/tenancyrequest', TenancyRequest::class)->name('tenancyrequest');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin-dashboard', AdminPanel::class);
+
 
    
 });
