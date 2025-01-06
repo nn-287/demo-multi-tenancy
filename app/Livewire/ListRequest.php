@@ -29,37 +29,25 @@ class ListRequest extends Component
 
     public function handleTenantRequest($id)
     {
-        // dd($id, "Tahya Masr");
-
-        $tenantRequest = TenancyRequest::findOrFail($id);
-        $subdomain = $tenantRequest->slug;
+        $tenantRequest = TenancyRequest::find($id);
+        $domain = $tenantRequest->slug;
 
         try {
-                $tenant = new Tenant();
-                $tenant->id = $tenantRequest->slug;
-                $tenant->slug = "Nanosa";
-                $tenant->data = [
-                    'tenancy_db_name' => 'tenant_' . $subdomain,
-                ];
-                $tenant->save();
+                $tenant = Tenant::create([
+                    'id' => $domain,
+                    'data' => [
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                        'tenancy_db_name'=> 'tenant_' . $domain,
+                    ],
+                ]);
+                $appUrl = parse_url(config('app.url'), PHP_URL_HOST); 
+                $dbName = env('DB_DATABASE');
 
-               
-                // Log::info('Tenant created successfully:', [
-                //     'id' => $tenant->id,
-                //     'data' => $tenant->data
-                // ]);
+                $tenant->domains()->create([
+                    'domain' => "{$domain}.{$dbName}.{$appUrl}", 
+                ]);
 
-            $tenantDBname = 'tenant_' . $subdomain;
-        
-            DB::statement("CREATE DATABASE `$tenantDBname`");
-
-            DB::purge('tenant');
-            config(['database.connections.tenant.database' => $tenantDBname]);
-            DB::reconnect('tenant');
-
-            Artisan::call('migrate', ['--database' => 'tenant']);
-
-            return back()->withSuccess('Tenant approved and database created successfully.');
     
         } catch (\Exception $e) {
             Log::error('Tenant creation failed:', [
@@ -67,7 +55,6 @@ class ListRequest extends Component
                 'trace' => $e->getTraceAsString()
             ]);
             
-            session()->flash('error', 'Failed to create tenant: ' . $e->getMessage());
             return back();
         }
     }
