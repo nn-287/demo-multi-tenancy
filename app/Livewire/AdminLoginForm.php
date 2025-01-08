@@ -23,11 +23,11 @@ class AdminLoginForm extends Component
         if($validatedData){
 
             if (Auth::attempt(['email' => $validatedData['email'], 'password' => $validatedData['password']])) {
-                return redirect('admin-dashboard');
+                return redirect(route('admin-dashboard'));
             }
-            return redirect('/');
+            return redirect(route('login'));
         }
-        return redirect('/');
+        return redirect(route('login'));
     }
     
     public function render()
