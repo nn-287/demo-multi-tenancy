@@ -4,6 +4,9 @@ use App\Models\TenancyRequest;
 use App\Models\Tenant;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
+use App\Mail\TestEmail;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 
 class ListRequest extends Component
 {
@@ -27,6 +30,7 @@ class ListRequest extends Component
     public function handleTenantRequest($id)
     {
         $tenantRequest = TenancyRequest::find($id);
+        $password = bin2hex(random_bytes(8 / 2));
         $domain = $tenantRequest->slug;
 
         try {
@@ -38,14 +42,23 @@ class ListRequest extends Component
                         'tenancy_db_name'=> 'tenant_' . $domain,
                     ],
                 ]);
+
+                User::create([
+                    'name' => $tenantRequest->name, 
+                    'email' => $tenantRequest->email, 
+                    'password' => bcrypt($password), 
+                    'tenant_id' => $tenant->id
+                ]);
+
                 $appUrl = parse_url(config('app.url'), PHP_URL_HOST); 
                 $dbName = env('DB_DATABASE');
 
                 $tenant->domains()->create([
                     'domain' => "{$domain}.{$dbName}.{$appUrl}", 
                 ]);
+                $this->credentialsMail($id,$domain,$dbName,$appUrl,$password);
 
-                $this->dispatch('showNotification', 'Tenant and its related data has been successfully created!','success');  
+                $this->dispatch('showNotification', 'Tenant and Credentials have been successfully created!','success');  
 
         } catch (\Exception $e) {
             $this->dispatch('showNotification', 'This tenant already exists!','error');        
@@ -56,6 +69,20 @@ class ListRequest extends Component
             ]);
         }
     }
+ 
+    public function credentialsMail($id, $domain, $dbName, $appUrl, $password)
+    {
+        $tenantRequest = TenancyRequest::find($id);
+
+        Mail::to($tenantRequest->email)->send(new TestEmail(
+            $tenantRequest->name,
+            "{$domain}.{$dbName}.{$appUrl}",
+            "{$domain}.{$dbName}.{$appUrl}/login", 
+            $tenantRequest->email,
+            $password
+        ));
+    }
+
    
     public function render()
     {
