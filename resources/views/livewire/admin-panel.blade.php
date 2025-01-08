@@ -1,16 +1,18 @@
 <div>
     <x-layouts.app>
         <div>
-            {{-- <x-crumb /> --}}
             <div class="drawer">
                 <input id="my-drawer" type="checkbox" class="drawer-toggle" />
                 <div class="drawer-content">
                   <!-- Page content here -->
-                  @if ($toggle)
-                    <div class="p-4">
-                        @livewire('list-request', ['toggle' => $toggle])
-                    </div>
-                  @endif
+                  
+                    @if ($toggle)
+                        <div class="p-4">
+                            @livewire('list-request', ['toggle' => $toggle])
+                        </div>
+                    @else
+                        <x-hero />
+                    @endif
                   <label for="my-drawer" class="btn btn-primary drawer-button ">
                     <i class="fas fa-bars"></i>
                   </label>                
@@ -25,7 +27,13 @@
                         <li>
                             <button class="btn btn-primary" wire:click="toggleRequests">Requests</button>
                         </li>
-                        <li><a>//</a></li>
+                        <br>
+                        <li class="menu-title">
+                            <span>Settings</span>
+                        </li>
+                        <li>
+                            <button class="btn btn-primary" wire:click="toggleRequests">Settings</button>
+                        </li>
                     </ul>
                 </div>
               </div>
