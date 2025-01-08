@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Livewire\TenantLoginForm;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
@@ -23,8 +24,26 @@ Route::middleware([
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
+    // Tenant's home route
     Route::get('/', function () {
-        // dd(\App\Models\User::all());
         return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
+    });
+    // Route::get('/test-session', function () {
+    //     return [
+    //         'session_id' => session()->getId(),
+    //         'token' => csrf_token(),
+    //         'tenant' => tenant('id'),
+    //     ];
+    // });
+
+    Route::get('/login', function() {
+        return view('tenant.login');
+    })->name('tenant.login');
+
+    
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/dashboard', function () {
+            return 'Welcome ' . auth()->user()->name . ' to the tenant dashboard!';
+        })->name('tenant.dashboard');
     });
 });
