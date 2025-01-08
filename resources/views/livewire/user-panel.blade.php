@@ -29,17 +29,37 @@
                         </li>
 
                         <li class="menu-title">
-                            <span></span>
+                            <span>Enrolled Courses</span>
                         </li>
                         <li>
-                            <button class="btn btn-primary" wire:click=""></button>
+                            <button class="btn btn-primary" wire:click="">Courses</button>
+                        </li>
+
+                        <li class="menu-title">
+                            <span>Classes</span>
+                        </li>
+                        <li>
+                            <button class="btn btn-primary" wire:click="">Classes</button>
+                        </li>
+
+                        <li class="menu-title">
+                            <span>Chores</span>
+                        </li>
+                        <li>
+                            <button class="btn btn-primary" wire:click="">Quizzes</button>
                         </li>
                         <br>
+                        <li>
+                            <button class="btn btn-primary" wire:click="">Assignments</button>
+                        </li>
+
+                        
+                        <br>
                         <li class="menu-title">
-                            <span>Settings</span>
+                            <span>Others</span>
                         </li>
                         <li>
-                            <button class="btn btn-primary" wire:click="">Settings</button>
+                            <button class="btn btn-primary" wire:click="">Forums</button>
                         </li>
                     </ul>
                 </div>
