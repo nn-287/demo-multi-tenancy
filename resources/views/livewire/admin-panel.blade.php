@@ -22,6 +22,13 @@
                     <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                         <!-- Sidebar content here -->
                         <li class="menu-title">
+                            <span>Home</span>
+                        </li>
+                        <li>
+                            <a class="btn btn-primary" href="/admin-dashboard">Home</a>
+                        </li>
+
+                        <li class="menu-title">
                             <span>Tenancy Requests</span>
                         </li>
                         <li>
