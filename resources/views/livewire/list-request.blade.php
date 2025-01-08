@@ -13,15 +13,10 @@
             }
         </style>
     </head>
-    {{-- <div class="flex justify-between items-center">
-        <h1 class="text-2xl font-bold">Tenancy Requests</h1>
-        <a class="btn btn-primary">Create Tenancy Request</a>
-    </div> --}}
     <div class="mt-4">
         <div class="overflow-x-auto">
             <div class="overflow-x-auto">
                 <table class="table">
-                  <!-- head -->
                   <thead>
                     <tr>
                       <th>ID</th>
@@ -67,4 +62,5 @@
               </div>
         </div>
     </div>
+    <x-footer />
 </div>

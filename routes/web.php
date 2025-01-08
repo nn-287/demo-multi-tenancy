@@ -1,7 +1,6 @@
 <?php
 
 use App\Livewire\AdminPanel;
-use App\Livewire\ListtenancyRequests;
 use App\Livewire\TenancyRequest;
 use Illuminate\Support\Facades\Route;
 
