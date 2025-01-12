@@ -51,12 +51,14 @@ class ListRequest extends Component
                 ]);
 
                 $appUrl = parse_url(config('app.url'), PHP_URL_HOST); 
-                $dbName = env('DB_DATABASE');
+
+                session(['SESSION_DOMAIN' => "{$domain}.{$appUrl}"]);
 
                 $tenant->domains()->create([
-                    'domain' => "{$domain}.{$dbName}.{$appUrl}", 
+                    'domain' => "{$domain}.{$appUrl}", 
                 ]);
-                $this->credentialsMail($id,$domain,$dbName,$appUrl,$password);
+                
+                $this->credentialsMail($id,$domain,$appUrl,$password);
 
                 $this->dispatch('showNotification', 'Tenant and Credentials have been successfully created!','success');  
 
@@ -70,18 +72,18 @@ class ListRequest extends Component
         }
     }
  
-    public function credentialsMail($id, $domain, $dbName, $appUrl, $password)
+    public function credentialsMail($id, $domain, $appUrl, $password)
     {
         $tenantRequest = TenancyRequest::find($id);
 
         Mail::to($tenantRequest->email)->send(new TestEmail(
-            $tenantRequest->name,
-            "{$domain}.{$dbName}.{$appUrl}",
-            "{$domain}.{$dbName}.{$appUrl}/login", 
-            $tenantRequest->email,
-            $password
+            $tenantRequest->name,                     // Tenant's name
+            "{$domain}.{$appUrl}/login",              // Login URL
+            $tenantRequest->email,                    // Tenant's email
+            $password                                  // Tenant's password
         ));
     }
+
 
    
     public function render()

@@ -14,14 +14,14 @@ class TestEmail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(private $name, private $domain, private $loginUrl, private $email, private $password)
+    public function __construct(private $name, private $loginUrl, private $email, private $password)
     {
         $this->name = $name;
-        $this->domain = $domain;
         $this->loginUrl = $loginUrl;
         $this->email = $email;
         $this->password = $password;
     }
+
 
 
 
@@ -44,7 +44,6 @@ class TestEmail extends Mailable
             view: 'mail.email',
             with: [
                 'name' => $this->name,
-                'domain' => $this->domain,
                 'loginUrl' => $this->loginUrl,
                 'email' => $this->email,
                 'password' => $this->password,

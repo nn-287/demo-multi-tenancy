@@ -28,19 +28,9 @@ Route::middleware([
     Route::get('/', function () {
         return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
     });
-    // Route::get('/test-session', function () {
-    //     return [
-    //         'session_id' => session()->getId(),
-    //         'token' => csrf_token(),
-    //         'tenant' => tenant('id'),
-    //     ];
-    // });
-
-    Route::get('/login', function() {
-        return view('tenant.login');
-    })->name('tenant.login');
-
     
+
+     
     Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', function () {
             return 'Welcome ' . auth()->user()->name . ' to the tenant dashboard!';
