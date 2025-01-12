@@ -1,14 +1,13 @@
 <?php
-
 namespace App\Livewire;
 use Livewire\Component;
 
 class UserPanel extends Component
 {
-    public $toggle = false;
-    public function toggleRequests()
+    public $showCourses = false;
+    public function toggleButton()
     {   
-        $this->toggle = !$this->toggle;
+        $this->showCourses = !$this->showCourses;
     }
     public function render()
     {
