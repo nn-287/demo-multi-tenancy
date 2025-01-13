@@ -1,20 +1,36 @@
 <?php
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Course extends Model
+class Course extends Model implements HasMedia
 {
-    protected $fillable = ['name', 'description', 'credit', 'status'];
+    use InteractsWithMedia;
 
-    //protected $table = 'course';
+    protected $fillable = ['name', 'description', 'credit', 'status'];
 
     public function users()
     {
         return $this->belongsToMany(User::class);
     }
 
-    public function courses()
+    public function registerMediaCollections(): void
     {
-        return $this->belongsToMany(Course::class);
+        $this
+            ->addMediaCollection('videos')
+            ->useDisk('public')
+            ->acceptsMimeTypes(['video/mp4'])
+            ->singleFile();
     }
+
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('video')
+            ->performOnCollections('videos')
+            ->keepOriginalImageFormat();
+    }
+
 }

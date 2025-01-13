@@ -5,14 +5,6 @@
                 <input id="my-drawer" type="checkbox" class="drawer-toggle" />
                 <div class="drawer-content">
                   <!-- Page content here -->
-                  
-                    @if ($toggle)
-                        <div class="p-4">
-                            {{-- @livewire('list-request', ['toggle' => $toggle]) --}}
-                        </div>
-                    @else
-                        <x-user-hero />
-                    @endif
                   <label for="my-drawer" class="btn btn-primary drawer-button ">
                     <i class="fas fa-bars"></i>
                   </label>                
@@ -32,7 +24,7 @@
                             <span>Enrolled Courses</span>
                         </li>
                         <li>
-                            <button class="btn btn-primary" wire:click="">Courses</button>
+                            <button class="btn btn-primary" wire:click="toggleButton">Courses</button>
                         </li>
 
                         <li class="menu-title">
@@ -64,6 +56,13 @@
                     </ul>
                 </div>
               </div>
+                @if ($showCourses)
+                    <div class="p-4">
+                        @livewire('course-component', ['showCourses' => $showCourses])
+                    </div>
+                @else
+                    <x-user-hero />
+                @endif
         </div>        
     </x-layouts.app>
     <x-footer />
