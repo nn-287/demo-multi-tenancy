@@ -12,10 +12,12 @@ class CourseComponent extends Component
     public $courses = [];
     public $toggle = false;
     public $selectedCourseId = null;
+    public $showCourses;
     protected $listeners = ['courseList' => 'showCourseList'];
  
-    public function mount()
+    public function mount($showCourses = false)
     {
+        $this->showCourses = $showCourses;
         $user = Auth::user();
         if ($user) {
             $this->list();  
