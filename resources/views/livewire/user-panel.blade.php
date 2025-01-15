@@ -24,14 +24,14 @@
                             <span>Enrolled Courses</span>
                         </li>
                         <li>
-                            <button class="btn btn-primary" wire:click="toggleButton">Courses</button>
+                            <button class="btn btn-primary" wire:click="switchTab('courses')">Courses</button>
                         </li>
 
                         <li class="menu-title">
                             <span>Classes</span>
                         </li>
                         <li>
-                            <button class="btn btn-primary" wire:click="">Classes</button>
+                            <button class="btn btn-primary" wire:click="switchTab('schedule')">Schedule</button>
                         </li>
 
                         <li class="menu-title">
@@ -56,13 +56,20 @@
                     </ul>
                 </div>
               </div>
-                @if ($showCourses)
+                @if($activeTab === 'courses')
                     <div class="p-4">
-                        @livewire('course-component', ['showCourses' => $showCourses])
+                        <livewire:course-component :showCourses="true" />
+                    </div>
+                @elseif($activeTab === 'schedule')
+                    <div class="p-4">
+                        <livewire:schedule label="schedule"/>
                     </div>
                 @else
                     <x-user-hero />
                 @endif
+
+
+                   
         </div>        
     </x-layouts.app>
     <x-footer />

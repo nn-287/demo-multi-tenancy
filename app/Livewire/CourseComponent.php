@@ -18,12 +18,11 @@ class CourseComponent extends Component
     public function mount($showCourses = false)
     {
         $this->showCourses = $showCourses;
-        $user = Auth::user();
-        if ($user) {
-            $this->list();  
+        if ($this->showCourses && Auth::user()) {
+            $this->list();
         }
-        
     }
+    
     public function showCourseList()
     {
         $this->selectedCourseId = null;
