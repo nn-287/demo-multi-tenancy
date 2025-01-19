@@ -4,14 +4,13 @@
             <div class="bg-white rounded-lg shadow-lg p-6">
                 <h2 class="text-2xl font-bold mb-4">{{ $course->name }}</h2>
 
-                <!--  Display Video -->
                 @if($videoUrl)
                     <div class="mt-4">
                         <video controls class="w-full rounded-md shadow-md">
                             <source src="{{ $videoUrl }}" type="video/mp4">
                         </video>
                     </div>
-                        @else
+                @else
                         <!-- Initial Modal -->
                         <dialog id="initial_modal" class="modal modal-bottom sm:modal-middle" {{ $showInitialModal ? 'open' : '' }}>
                             <div class="modal-box">
@@ -26,7 +25,7 @@
                             </div>
                         </dialog>
                     
-                        <!-- Upload Modal -->
+
                         @if($showUploadModal)
                             <div class="modal modal-open">
                                 <div class="modal-box">
