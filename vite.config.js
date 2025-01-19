@@ -5,7 +5,11 @@ export default defineConfig({
     plugins: [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
-            refresh: true,
+            refresh: false,
         }),
+
+        // livewire({
+        //     refresh: ['resources/css/app.css'],
+        // }),
     ],
 });
