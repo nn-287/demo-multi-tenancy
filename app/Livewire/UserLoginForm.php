@@ -1,11 +1,9 @@
 <?php
-
 namespace App\Livewire;
-
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class AdminLoginForm extends Component
+class UserLoginForm extends Component
 {
     public $email = '';
     public $password = '';
@@ -23,15 +21,14 @@ class AdminLoginForm extends Component
         if($validatedData){
 
             if (Auth::attempt(['email' => $validatedData['email'], 'password' => $validatedData['password']])) {
-                return redirect(route('admin-dashboard'));
+                return redirect(route('user-dashboard'));
             }
-            return redirect(route('login'));
+            return redirect(route('user-login'));
         }
-        return redirect(route('login'));
+        return redirect(route('user-login'));
     }
-    
     public function render()
     {
-        return view('livewire.admin-login-form');
+        return view('livewire.user-login-form');
     }
 }

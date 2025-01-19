@@ -11,7 +11,6 @@ class AdminPanel extends Component
     {   
         $this->toggle = !$this->toggle;
     }
-
     public function render()
     {
         return view('livewire.admin-panel');
