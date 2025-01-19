@@ -11,16 +11,6 @@
                             <source src="{{ $videoUrl }}" type="video/mp4">
                         </video>
                     </div>
-                    {{-- //NOTE -     --}}
-                    <!-- debug -->
-                        {{-- <div class="mt-2 text-sm text-gray-500">
-                            <p>Video URL: <a href="{{ $videoUrl }}" target="_blank" class="text-blue-500">{{ $videoUrl }}</a></p>
-                            @if(file_exists(storage_path('app/public/' . $course->getFirstMedia('videos')?->id . '/' . $course->getFirstMedia('videos')?->file_name)))
-                                <p class="text-green-500">File exists in storage</p>
-                            @else
-                                <p class="text-red-500">File not found in storage</p>
-                            @endif
-                        </div> --}}
                         @else
                         <!-- Initial Modal -->
                         <dialog id="initial_modal" class="modal modal-bottom sm:modal-middle" {{ $showInitialModal ? 'open' : '' }}>

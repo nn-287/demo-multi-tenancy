@@ -1,15 +1,11 @@
-<div>
-    <x-layouts.app>
-        <div>
-            @if(Auth::user())
-                <div class="schedule-content">
-                    <h2>Schedule</h2>
-                    <button class="btn btn-primary" wire:click="index">Choose Me!</button> 
-                    <livewire:Calendar />
-                </div>
-            @else
-                <p>Please login to view your schedule.</p>
-            @endif
+<div class="w-full">
+    @if(Auth::user())
+        <div class="schedule-content w-full">
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <livewire:Calendar />
+            </div>
         </div>
-    </x-layouts.app>
+    @else
+        <p>Please login to view your schedule.</p>
+    @endif
 </div>

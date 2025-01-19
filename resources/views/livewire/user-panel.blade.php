@@ -38,7 +38,7 @@
                             <span>Chores</span>
                         </li>
                         <li>
-                            <button class="btn btn-primary" wire:click="">Quizzes</button>
+                            <button class="btn btn-primary" wire:click="switchTab('quiz')">Quizzes</button>
                         </li>
                         <br>
                         <li>
@@ -62,7 +62,11 @@
                     </div>
                 @elseif($activeTab === 'schedule')
                     <div class="p-4">
-                        <livewire:schedule label="schedule"/>
+                        <livewire:schedule :current-tab="$activeTab"/>
+                    </div>
+                @elseif($activeTab === 'quiz')
+                    <div class="p-4">
+                        <livewire:quiz :current-tab="$activeTab"/>
                     </div>
                 @else
                     <x-user-hero />
