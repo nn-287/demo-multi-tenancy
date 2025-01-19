@@ -1,4 +1,30 @@
 <div>
+    <style>
+        .sidebar {
+            overflow: hidden;
+            position: relative;
+            z-index: 100;
+            }
+
+            .sidebar-content {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            }
+
+            .tab-content {
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            }
+
+            .tab-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            }
+    </style>
     <x-layouts.app>
         <div>
             <div class="drawer">
@@ -31,18 +57,18 @@
                             <span>Classes</span>
                         </li>
                         <li>
-                            <button class="btn btn-primary" wire:click="switchTab('schedule')">Schedule</button>
+                            <button class="btn btn-primary" wire:click="">Schedule</button>
                         </li>
 
                         <li class="menu-title">
                             <span>Chores</span>
                         </li>
                         <li>
-                            <button class="btn btn-primary" wire:click="switchTab('quiz')">Quizzes</button>
+                            <button class="btn btn-primary" wire:click="">Quizzes</button>
                         </li>
                         <br>
                         <li>
-                            <button class="btn btn-primary" wire:click="">Assignments</button>
+                            <button class="btn btn-primary" wire:click="switchTab('online')">Online Classes</button>
                         </li>
 
                         
@@ -67,6 +93,10 @@
                 @elseif($activeTab === 'quiz')
                     <div class="p-4">
                         <livewire:quiz :current-tab="$activeTab"/>
+                    </div>
+                @elseif($activeTab === 'online')
+                    <div class="p-4">
+                        <livewire:Assingment :current-tab="$activeTab"/>
                     </div>
                 @else
                     <x-user-hero />

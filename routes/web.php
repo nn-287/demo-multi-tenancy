@@ -27,5 +27,6 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     //Tenant users simulation
     Route::get('/user-dashboard', UserPanel::class)->name('user-dashboard');  
+    Route::get('/btest', BTest::class)->name('btest');  
 
 });
