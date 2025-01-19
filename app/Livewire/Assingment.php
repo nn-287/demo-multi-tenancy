@@ -97,9 +97,7 @@ class Assingment extends Component
             $this->index();
         }
     }
-    // public function index(){
-    //     dd($this->currentTab,"Alo Assingment");
-    // }
+    
     public function render()
     {
         return view('livewire.assingment');
